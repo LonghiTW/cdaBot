@@ -12,7 +12,5 @@ class HelloResponder(commands.Cog):
         if "你好" in message.content:
             await message.channel.send("你好你好！👋")
 
-        await self.bot.process_commands(message)
-
 async def setup(bot):
     await bot.add_cog(HelloResponder(bot))
