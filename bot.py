@@ -26,7 +26,7 @@ def load_all_cogs(bot, folder="cogs"):
 @bot.event
 async def on_ready():
     print("Bot is ready!")
-	print(f"Logged in as {bot.user}")
+    print(f"Logged in as {bot.user}")
 
 load_all_cogs(bot)
 bot.run(TOKEN)
