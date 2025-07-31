@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-class ip(commands.Cog):
+class IP(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -8,5 +8,5 @@ class ip(commands.Cog):
     async def ip(self, ctx):
         await ctx.send("`bte.ntc.im`")
 
-def setup(bot):
-    bot.add_cog(ip(bot))
+async def setup(bot):
+    await bot.add_cog(IP(bot))
