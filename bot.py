@@ -27,6 +27,15 @@ async def load_all_cogs(bot, folder="cogs"):
                 except Exception as e:
                     print(f"❌ Failed to load {ext}: {e}")
 
+# 處理文字訊息：讓 listener 接管 + 指令
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+
+    # 呼叫所有 @Cog.listener()
+    await bot.process_commands(message)
+
 # 當 bot 上線時
 @bot.event
 async def on_ready():
