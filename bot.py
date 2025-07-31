@@ -31,7 +31,7 @@ async def load_all_cogs(bot, folder="cogs"):
 @bot.event
 async def on_ready():
     print("Bot is ready!")
-	print(f"Logged in as {bot.user}")
+    print(f"Logged in as {bot.user}")
 
 # 主執行函式（用 asyncio.run 執行 async 流程）
 async def main():
