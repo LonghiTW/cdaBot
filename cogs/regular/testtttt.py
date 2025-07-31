@@ -26,7 +26,7 @@ class SunsetNotifier(commands.Cog):
 
     def schedule_daily_job(self):
         now = datetime.now(self.tz)
-        target_time = self.get_sunset_minus_1h40m(now.date())
+        target_time = self.get_sunset_minus_1h50m(now.date())
 
         self.scheduler.add_job(
             self.send_sunset_message,
@@ -41,12 +41,12 @@ class SunsetNotifier(commands.Cog):
             id=f"sunset_message_{target_time.date()}",  # 防止重複排程
             replace_existing=True
         )
-        print(f"✅ 日落前 1 小時 40 分任務已安排於：{target_time.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"✅ 日落前 1 小時 50 分任務已安排於：{target_time.strftime('%Y-%m-%d %H:%M:%S')}")
 
     async def send_sunset_message(self):
         channel = self.bot.get_channel(self.channel_id)
         if channel:
-            await channel.send("☀️ 現在是日落前 1 小時 40 分，準備收工囉！")
+            await channel.send("☀️ 現在是日落前 1 小時 50 分，準備收工囉！")
             print("📤 已發送日落提醒訊息。")
         else:
             print("❌ 找不到指定頻道。")
