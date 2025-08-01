@@ -34,6 +34,7 @@ async def load_all_cogs(bot, folder="cogs"):
 def register_events(bot):
     @bot.event
     async def on_ready():
+        print("Bot is ready!")
         print(f"🤖 {bot.user} is online!")
 
     @bot.event
@@ -53,7 +54,6 @@ async def main():
     await asyncio.gather(*[
         bot.start(token) for bot, token in zip(bots, TOKENS)
     ])
-    print("Bot is ready!")
 
 if __name__ == "__main__":
     asyncio.run(main())
