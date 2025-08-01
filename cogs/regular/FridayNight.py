@@ -35,7 +35,7 @@ class FridayNight(commands.Cog):
             target_time = s["sunset"] + timedelta(minutes=1)
 
         self.scheduler.add_job(self.send_gif, trigger=DateTrigger(run_date=target_time, timezone=self.tz))
-        print(f"✅ 已排程星期五晚上在 {target_time.strftime('%Y-%m-%d %H:%M:%S')} 傳送 gif")
+        print(f"✅ 已排程在 {target_time.strftime('%Y-%m-%d %H:%M:%S')} 傳送 gif")
 
     async def send_gif(self):
         for channel_id in self.channel_ids:
