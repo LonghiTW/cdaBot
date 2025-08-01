@@ -1,36 +1,31 @@
 from discord.ext import commands
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
+from discord import TextChannel
 import pytz
 
-class SundayNight(commands.Cog):
+class SundayReminder(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.channel_id = 1099128587220697149  # 替換成你要發送的頻道 ID
-
         self.scheduler = AsyncIOScheduler(timezone="Asia/Taipei")
-        self.scheduler.add_job(self.send_image, CronTrigger(
-            day_of_week='sun',  # 星期日
-            hour=21,
-            minute=0
+        self.channel_id = 1099128587220697149
+
+        # 每週日 21:00 發送
+        self.scheduler.add_job(self.send_sunday_image, CronTrigger(
+            day_of_week='sun', hour=21, minute=0, timezone=pytz.timezone("Asia/Taipei")
         ))
         self.scheduler.start()
 
-    async def send_image(self):
+    async def send_sunday_image(self):
         channel = self.bot.get_channel(self.channel_id)
-        if channel:
-            try:
-                await channel.send(
-                    "https://cdn.discordapp.com/attachments/886936474723950611/1396476771377086474/image0.jpg?ex=688d6317&is=688c1197&hm=fda80ec9188732e461b8c478e7fab2bd95e896b06f693454f2adcca50964c339&"
-                )
-                print("✅ 已在星期日晚上 21:00 發送圖片")
-            except Exception as e:
-                print(f"❌ 發送圖片失敗：{e}")
+        if channel and isinstance(channel, TextChannel):
+            await channel.send("https://cdn.discordapp.com/attachments/886936474723950611/1396476771377086474/image0.jpg")
+            print("✅ 已於週日 21:00 傳送圖片")
         else:
-            print("❌ 找不到指定的頻道。")
+            print("❌ 找不到頻道或頻道錯誤")
 
     async def cog_unload(self):
-        self.scheduler.shutdown()
+        self.scheduler.shutdown(wait=False)
 
 async def setup(bot):
-    await bot.add_cog(SundayNight(bot))
+    await bot.add_cog(SundayReminder(bot))
