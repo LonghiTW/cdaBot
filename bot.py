@@ -30,8 +30,11 @@ async def load_all_cogs(bot, folder="cogs"):
                 except Exception as e:
                     print(f"❌ Failed to load {ext}: {e}")
 
-# 加入事件到每個 bot
-for bot in bots:
+# 加入事件到每個 bot（使用函式工廠）
+def register_events(bot):
+    @bot.event
+    async def on_ready():
+        print(f"🤖 {bot.user} is online!")
 
     @bot.event
     async def on_message(message):
@@ -39,10 +42,8 @@ for bot in bots:
             return
         await bot.process_commands(message)
 
-    @bot.event
-    async def on_ready():
-        print("Bot is ready!")
-        print(f"{bot.user}")
+for bot in bots:
+    register_events(bot)
 
 # 主函式：啟動所有 bot
 async def main():
@@ -52,6 +53,7 @@ async def main():
     await asyncio.gather(*[
         bot.start(token) for bot, token in zip(bots, TOKENS)
     ])
+    print("Bot is ready!")
 
 if __name__ == "__main__":
     asyncio.run(main())
