@@ -12,7 +12,7 @@ class FridayNight(commands.Cog):
         self.scheduler = AsyncIOScheduler(timezone="Asia/Taipei")
         self.tz = pytz.timezone("Asia/Taipei")
         self.channel_ids = [
-            1099128587220697149,  # CDA
+            1349540882369478688,  # CDA
             735692114360533143    # BTW
         ]
         self.city = LocationInfo("Taipei", "Taiwan", "Asia/Taipei", 25.0330, 121.5654)
