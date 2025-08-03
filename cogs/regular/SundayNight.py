@@ -11,7 +11,7 @@ class SundayReminder(commands.Cog):
 
         # ✅ 多個頻道 ID
         self.channel_ids = [
-            1099128587220697149,  # CDA
+            1349540882369478688,  # CDA
             735692114360533143    # BTW
         ]
 
