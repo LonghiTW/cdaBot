@@ -6,13 +6,13 @@ class BirthdayResponder(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
-        # {guild_id: date} → 紀錄今天是否已經觸發過
+        # 每日觸發紀錄
         self.last_trigger_date = {}
 
         # 關鍵字
         self.keywords = ["生日", "birthday", "hbd"]
 
-        # 回覆
+        # 回覆組
         self.replies = [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFqfCfC1u-9ZNfWQi4MR3AJGWaRFggbOQwK5yX0BNUk2kbcSnecnd_nN4&s=10",
             "https://megapx-assets.dcard.tw/images/be86cb9c-92d3-4a47-8ee8-c3421bd74579/orig.jpeg",
