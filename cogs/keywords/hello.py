@@ -1,6 +1,7 @@
 from discord.ext import commands
 import datetime
 import random
+import re
 
 class HelloResponder(commands.Cog):
     def __init__(self, bot):
