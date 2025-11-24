@@ -15,6 +15,12 @@ class HelloResponder(commands.Cog):
         # 英文關鍵字（不分大小寫）
         self.en_keywords = ["hello", "hi"]
 
+        # 英文正則
+        self.en_patterns = [
+            re.compile(rf"\b{kw}[.!?~]?\b", re.IGNORECASE)
+            for kw in self.en_keywords
+        ]
+        
         # 中文回覆組
         self.replies_zh = [
             "你好你好！👋",
@@ -53,7 +59,7 @@ class HelloResponder(commands.Cog):
         # --------------------
         # 英文關鍵字觸發
         # --------------------
-        if any(keyword in lowered for keyword in self.en_keywords):
+        if any(pattern.search(content) for pattern in self.en_patterns):
             self.last_trigger_date[channel_id] = today
             reply = random.choice(self.replies_en)
             await message.channel.send(reply)
